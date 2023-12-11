@@ -5,7 +5,7 @@ export function normalizeCountriesResponse(countries: CountryApiResponse[]) {
     return {
       fullName: country.name.common,
       population: country.population,
-      officialCurrency: Object.values(country.currencies || {}),
+      officialCurrency: country.currencies,
     };
   });
 

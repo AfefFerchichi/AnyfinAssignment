@@ -34,15 +34,15 @@ export interface CountryApiResponse {
 export interface Country {
   fullName: string;
   population: number;
-  officialCurrency: Currency[];
+  officialCurrency: { [key: string]: Currency };
 }
-
+export interface SEKCurrencyRate {
+  [key: string]: number;
+}
 export interface CurrencyRateResponse {
   success: boolean;
   timestamp: number;
   base: 'EUR';
   date: string;
-  rates: {
-    [key: string]: number;
-  };
+  rates: SEKCurrencyRate;
 }

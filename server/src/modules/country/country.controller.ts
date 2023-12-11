@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CountryService } from './country.service';
-import { Country, CurrencyRateResponse } from './country.dto';
+import { Country, SEKCurrencyRate } from './country.dto';
 
 @Controller('/country')
 export class CountryController {
@@ -17,7 +17,7 @@ export class CountryController {
   }
 
   @Get('/currencies')
-  getAllCurrenciesExcahngeRate(): Promise<CurrencyRateResponse> {
+  getAllCurrenciesExcahngeRate(): Promise<SEKCurrencyRate> {
     return this.countryService.getAllCurrenciesExcahngeRate();
   }
 }

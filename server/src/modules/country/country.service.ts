@@ -3,10 +3,12 @@ import {
   Country,
   CountryApiResponse,
   CurrencyRateResponse,
+  SEKCurrencyRate,
 } from './country.dto';
 import { normalizeCountriesResponse } from './utils/normalizeCountryREsponse';
 import Axios from 'axios';
 import { config } from 'dotenv';
+import { changeBaseCurrencytoSEK } from './utils/changeBaseCurrencytoSEK';
 
 config();
 const FIXER_API_KEY = process.env.FIXER_API_KEY;
@@ -29,10 +31,11 @@ export class CountryService {
     return normalizedCountries;
   }
 
-  async getAllCurrenciesExcahngeRate(): Promise<CurrencyRateResponse> {
+  async getAllCurrenciesExcahngeRate(): Promise<SEKCurrencyRate> {
     const { data } = await Axios.get<CurrencyRateResponse>(
       `http://data.fixer.io/api/latest?access_key=${FIXER_API_KEY}`,
     );
-    return data;
+    const newRatesInSEK = changeBaseCurrencytoSEK(data);
+    return newRatesInSEK;
   }
 }
