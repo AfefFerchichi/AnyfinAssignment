@@ -36,3 +36,13 @@ export interface Country {
   population: number;
   officialCurrency: Currency[];
 }
+
+export interface CurrencyRateResponse {
+  success: boolean;
+  timestamp: number;
+  base: 'EUR';
+  date: string;
+  rates: {
+    [key: string]: number;
+  };
+}
