@@ -12,3 +12,9 @@ export interface ICurrencyRate {
   [key: string]: number;
 }
 
+
+export interface ILoginResponse {
+  id: number;
+  email: string;
+  token: string;
+}

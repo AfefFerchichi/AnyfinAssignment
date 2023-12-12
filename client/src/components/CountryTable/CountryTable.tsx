@@ -54,8 +54,7 @@ export const CountryTable = (props: CountryTableProps) => {
       ),
     },
     {
-      // Show input field for user to enter amount and convert to SEK
-      title: "Amount",
+      title: "Amount in SEK",
       dataIndex: "amount",
       key: "amount",
       width: "10%",
@@ -80,7 +79,7 @@ export const CountryTable = (props: CountryTableProps) => {
       ),
     },
     {
-      title: "Amount in SEK",
+      title: "Amount in Local Currency",
       dataIndex: "amount",
       key: "amount",
       width: "20%",

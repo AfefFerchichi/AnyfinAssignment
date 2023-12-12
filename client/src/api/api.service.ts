@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ICountry, ICurrencyRate } from "./api.types";
+import { ICountry, ICurrencyRate, ILoginResponse } from "./api.types";
 
 const baseUrl: string = "http://localhost:4000";
 
@@ -19,10 +19,10 @@ APIInstance.interceptors.request.use(
   }
 );
 
-export const getCountries = async (name?:string): Promise<ICountry[]> => {
+export const getCountries = async (name?: string): Promise<ICountry[]> => {
   try {
-    const { data: countries } = await axios.get<ICountry[]>(
-      baseUrl + "/country" + (name ? `?name=${name}` : ""),
+    const { data: countries } = await APIInstance.get<ICountry[]>(
+      baseUrl + "/country" + (name ? `?name=${name}` : "")
     );
     return countries;
   } catch (error: any) {
@@ -30,12 +30,31 @@ export const getCountries = async (name?:string): Promise<ICountry[]> => {
   }
 };
 
-export const getAllCurrenciesExcahngeRate = async (): Promise<ICurrencyRate> => {
+export const getAllCurrenciesExcahngeRate =
+  async (): Promise<ICurrencyRate> => {
+    try {
+      const { data: currencyRates } = await APIInstance.get<ICurrencyRate>(
+        baseUrl + "/country/currencies"
+      );
+      return currencyRates;
+    } catch (error: any) {
+      throw new Error(error);
+    }
+  };
+
+export const userLogin = async (
+  email: string,
+  password: string
+): Promise<ILoginResponse> => {
   try {
-    const { data: currencyRates } = await axios.get<ICurrencyRate>(
-      baseUrl + "/country/currencies",
+    const { data: user } = await APIInstance.post<ILoginResponse>(
+      "/user/login",
+      {
+        email,
+        password,
+      }
     );
-    return currencyRates;
+    return user;
   } catch (error: any) {
     throw new Error(error);
   }
