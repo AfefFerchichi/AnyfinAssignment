@@ -73,7 +73,7 @@ export const CountryContainer = () => {
     <div>
       <Typography>
         <h4>
-        Hello ✋! Please search your country and select from the dropdown
+          Hello ✋! Please search your country and select from the dropdown
         </h4>
       </Typography>
       <Space direction="vertical" size={10} className="container-country">
@@ -85,7 +85,6 @@ export const CountryContainer = () => {
           value={null || searchText}
           onSelect={(value) => filterCountries(countries, value)}
           options={autoCompleteOptions}
-          size="middle"
           onChange={(value) => setSearchText(value)}
           onClick={() => {
             setSearchText("");

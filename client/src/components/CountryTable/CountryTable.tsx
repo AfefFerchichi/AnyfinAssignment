@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ICountry } from "../../api/api.types";
 import { CountryTableProps } from "./CountryTable.types";
-import { Table, TableColumnType } from "antd";
+import { Input, Table, TableColumnType } from "antd";
 export const CountryTable = (props: CountryTableProps) => {
   const { countries, currencyExchangeRates } = props;
 
@@ -62,14 +62,13 @@ export const CountryTable = (props: CountryTableProps) => {
         <>
           {Object.keys(country.officialCurrency).map((key, index) => (
             <div key={index}>
-              <input
+              <Input
                 type="number"
                 name="amount"
                 onChange={(e) => {
                   const amount = e.target.value;
                   const totalAmount =
                     Number(amount) * Number(currencyExchangeRates[key]);
-                  console.log(amount);
                   setTotalAmountMap({ ...totalAmountMap, [key]: totalAmount });
                 }}
               />
