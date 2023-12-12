@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { JSONWebTokenSalt } from 'src/config/config';
+import { JWTSecret } from 'src/config/config';
 import * as jwt from 'jsonwebtoken';
 import { UserRO } from './user.entity';
 import { createSha } from './utils/createSha';
@@ -20,7 +20,7 @@ export class UserService {
       email === defaultUser.email &&
       hashedPassword === defaultUser.password
     ) {
-      const token = jwt.sign({ email }, JSONWebTokenSalt, { expiresIn: '48h' });
+      const token = jwt.sign({ email }, JWTSecret, { expiresIn: '48h' });
       return { email: defaultUser.email, id: defaultUser.id, token };
     }
     throw new HttpException('Unauthorized', HttpStatus.BAD_REQUEST);
