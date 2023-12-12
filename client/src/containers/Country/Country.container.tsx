@@ -5,7 +5,7 @@ import {
   getCountries,
 } from "../../api/api.service";
 import { CountryTable } from "../../components/CountryTable/CountryTable";
-import { AutoComplete, Input, Space } from "antd";
+import { AutoComplete, Input, Space, Typography } from "antd";
 import { SelectProps } from "antd/lib/select";
 import debounce from "lodash.debounce";
 import "./Country.css";
@@ -71,6 +71,11 @@ export const CountryContainer = () => {
 
   return (
     <div>
+      <Typography>
+        <h4>
+        Hello ✋! Please search your country and select from the dropdown
+        </h4>
+      </Typography>
       <Space direction="vertical" size={10} className="container-country">
         <AutoComplete
           popupClassName="certain-category-search-dropdown"

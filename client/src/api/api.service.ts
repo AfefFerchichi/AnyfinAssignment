@@ -5,7 +5,6 @@ const baseUrl: string = "http://localhost:4000";
 
 const APIInstance = axios.create({
   baseURL: baseUrl,
-  timeout: 1000,
 });
 
 APIInstance.interceptors.request.use(
