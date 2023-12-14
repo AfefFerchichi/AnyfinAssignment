@@ -16,7 +16,6 @@ export class CountryController {
 
   @Get('/currencies')
   @UseGuards(AuthGuard)
-  @UseGuards(AuthGuard)
   getAllCurrenciesExcahngeRate(): Promise<SEKCurrencyRate> {
     return this.countryService.getAllCurrenciesExcahngeRate();
   }

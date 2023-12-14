@@ -6,21 +6,29 @@ import { LogoutOutlined } from "@ant-design/icons";
 
 const SecureRoute: React.FC<SecureRouteProps> = (props: SecureRouteProps) => {
   const { component: Component } = props;
-const navigate = useNavigate();
+  
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
+
   if (!token) {
     return <Navigate to="/" />;
   }
+  
   const logout = () => {
     localStorage.removeItem("token");
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   return (
-  <div>
-    <FloatButton icon={<LogoutOutlined />} tooltip="Logout" onClick={()=> logout()} />
-    <Component />
-  </div>);
+    <div>
+      <FloatButton
+        icon={<LogoutOutlined />}
+        tooltip="Logout"
+        onClick={() => logout()}
+      />
+      <Component />
+    </div>
+  );
 };
 
 export default SecureRoute;

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ICountry } from "../../api/api.types";
 import { CountryTableProps } from "./CountryTable.types";
-import { Input, Table, TableColumnType } from "antd";
+import { Button, Input, Table, TableColumnType } from "antd";
+
 export const CountryTable = (props: CountryTableProps) => {
-  const { countries, currencyExchangeRates } = props;
+  const { countries, currencyExchangeRates, onDelete} = props;
 
   const [totalAmountMap, setTotalAmountMap] = useState<Record<string, number>>(
     {}
@@ -63,6 +64,7 @@ export const CountryTable = (props: CountryTableProps) => {
           {Object.keys(country.officialCurrency).map((key, index) => (
             <div key={index}>
               <Input
+                min={0}
                 type="number"
                 name="amount"
                 onChange={(e) => {
@@ -81,7 +83,7 @@ export const CountryTable = (props: CountryTableProps) => {
       title: "Amount in Local Currency",
       dataIndex: "amount",
       key: "amount",
-      width: "20%",
+      width: "15%",
       render: (_: string, country) => (
         <>
           {Object.keys(country.officialCurrency).map((key, index) => (
@@ -94,6 +96,15 @@ export const CountryTable = (props: CountryTableProps) => {
         </>
       ),
     },
+    {
+      title: "Remove",
+      key: "action",
+      width: "10%",
+      render: (_: string, country) => (
+        <Button onClick={() => onDelete?.(country)}>Delete</Button>
+      ),
+    },
+
   ];
 
   return (

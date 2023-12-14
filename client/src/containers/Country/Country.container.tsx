@@ -29,22 +29,24 @@ export const CountryContainer = () => {
     fetchCountries,
   ]);
 
-  const filterCountries = useCallback(
+  const selectACountry = useCallback(
     (countries: ICountry[], searchText: string) => {
-      const filteredCountries = countries.filter((country) =>
+      const filteredCountries = countries.find((country) =>
         country.fullName.toLowerCase().includes(searchText.toLowerCase())
-      );
-      const finalCountries = [...filteredCountries, ...selectedCountries];
+      ) as ICountry;
+      const finalCountries = [filteredCountries, ...selectedCountries];
 
       setSelectedCountries(finalCountries);
     },
     [selectedCountries]
   );
 
+  // Sending country request on initial load and after user type
   useEffect(() => {
     debounceLoadData(searchText);
   }, [debounceLoadData, searchText]);
 
+  // Sending currency request on initial load
   useEffect(() => {
     const fetchCurrencyExchangeRates = async () => {
       try {
@@ -83,7 +85,7 @@ export const CountryContainer = () => {
           style={{ width: 250 }}
           allowClear={true}
           value={null || searchText}
-          onSelect={(value) => filterCountries(countries, value)}
+          onSelect={(value) => selectACountry(countries, value)}
           options={autoCompleteOptions}
           onChange={(value) => setSearchText(value)}
           onClick={() => {
@@ -94,6 +96,12 @@ export const CountryContainer = () => {
         </AutoComplete>
         <CountryTable
           countries={selectedCountries}
+          onDelete={(country) => {
+            const filteredCountries = selectedCountries.filter(
+              (selectedCountry) => selectedCountry.fullName !== country.fullName
+            );
+            setSelectedCountries(filteredCountries);
+          }}
           currencyExchangeRates={currencyExchangeRates}
         />
       </Space>
